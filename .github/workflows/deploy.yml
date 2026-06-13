@@ -1,0 +1,40 @@
+name: Deploy ke GitHub Pages
+
+# Pipeline CI/CD: setiap kali ada push ke branch `main`,
+# website otomatis di-deploy ulang ke GitHub Pages.
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch: # bisa dijalankan manual dari tab Actions
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Hanya boleh ada 1 deployment berjalan dalam satu waktu
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout kode
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact (seluruh isi situs)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+      - name: Deploy ke GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
