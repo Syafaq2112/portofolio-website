@@ -8,3 +8,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Local preview config
+.claude/
