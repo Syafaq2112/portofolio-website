@@ -1,7 +1,5 @@
-// ===== Tahun di footer =====
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// ===== Navbar scroll state + progress bar =====
 const navbar = document.getElementById("navbar");
 const progress = document.getElementById("scrollProgress");
 
@@ -12,7 +10,6 @@ function onScroll() {
   const docH = document.documentElement.scrollHeight - window.innerHeight;
   progress.style.width = (docH > 0 ? (y / docH) * 100 : 0) + "%";
 
-  // Highlight link aktif
   let current = "";
   document.querySelectorAll("section[id]").forEach((sec) => {
     if (y >= sec.offsetTop - 120) current = sec.id;
@@ -24,7 +21,6 @@ function onScroll() {
 window.addEventListener("scroll", onScroll, { passive: true });
 onScroll();
 
-// ===== Mobile menu =====
 const menuToggle = document.getElementById("menuToggle");
 const navLinks = document.getElementById("navLinks");
 menuToggle.addEventListener("click", () => {
@@ -38,7 +34,6 @@ navLinks.querySelectorAll("a").forEach((a) =>
   })
 );
 
-// ===== Theme toggle (dengan persistensi) =====
 const themeToggle = document.getElementById("themeToggle");
 const themeIcon = themeToggle.querySelector(".theme-icon");
 const saved = localStorage.getItem("theme");
@@ -54,7 +49,6 @@ themeToggle.addEventListener("click", () => {
   localStorage.setItem("theme", next);
 });
 
-// ===== Reveal on scroll =====
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
