@@ -11,3 +11,6 @@ Thumbs.db
 
 # Local preview config
 .claude/
+
+# Workflow ditambahkan saat tahap deploy (perlu scope 'workflow')
+.github/
